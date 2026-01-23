@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, deque
 
 '''
 Initialize each person and hospital to be free.
@@ -20,15 +20,48 @@ while (some hospital is free and hasn’t been matched/assigned
 
 person = defaultdict(list)
 hospitals = defaultdict(list)
+
 #Initialized 
+person["Xavier"] = [["Shands",True], ["North", True], ["Vetrans",True]]
+person["Yancey"] = [["North",True], ["Shands", True], ["Vetrans",True]]
+person["Zeus"] = [["Shands",True], ["North", True], ["Vetrans",True]]
 
-person["Xavier"] = [["Shands",False], ["North", False], ["Vetrans",False]]
-person["Yancey"] = [["North",False], ["Shands", False], ["Vetrans",False]]
-person["Zeus"] = [["Shands",False], ["North", False], ["Vetrans",False]]
+hospitals["Shands"] = [["Yancey",True], ["Xavier", True], ["Zeus",True]]
+hospitals["North"] = [["Shands",True], ["Yancey", True], ["Zeus",True]]
+hospitals["Vetrans"] = [["Xavier",True], ["Yancey", True], ["Zeus",True]]
 
-hospitals["Shands"] = [["Yancey",False], ["Xavier", False], ["Zeus",False]]
-hospitals["North"] = [["Shands",False], ["Yancey", False], ["Zeus",False]]
-hospitals["Vetrans"] = [["Xavier",False], ["Yancey", False], ["Zeus",False]]
+free = {
+    "Xavier" : True,
+    "Yancey" : True,
+    "Zeus" : True
+}
+
+applicants = deque(["Xavier", "Yancey", "Zeus"])
+unmatched_hospital = deque(["Shands", "North", "Vetrans"])
+
+def assign(h, a):
+    pass
+
+def swap(h,a):
+    pass
+
+perfer = dict()
+
+while unmatched_hospital:
+
+    hospital = unmatched_hospital.popleft()
+    hospital_list = hospitals[hospital] #-> we get the list
+    applicant = lol
+    #while True:
+    #    a = applicants.pop()
+
+
+    if free[applicant]:
+        assign(hospital, applicant)
+    elif not free[applicant] and perfer[applicant] == hospital:
+        swap(hospital, applicant)
+    else:
+        continue
 
 
 
