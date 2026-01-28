@@ -1,5 +1,6 @@
 from collections import defaultdict, deque
 
+
 '''
 Initialize each person and hospital to be free.
 
@@ -55,13 +56,44 @@ hospitals = {
     "Vetrans" : ["Xavier", "Yancey", "Zeus"]
 }
 
+n = 3
+
+data = [
+    [1, 2, 3],  # hospital 1 prefs
+    [2, 3, 1],  # hospital 2 prefs
+    [2, 1, 3],  # hospital 3 prefs
+    [2, 1, 3],  # student 1 prefs
+    [1, 2, 3],  # student 2 prefs
+    [1, 2, 3]   # student 3 prefs
+]
+
+person = defaultdict(list)
+hospitals = defaultdict(list)
+
+
 def initialize():
     
+    '''
     for student in students:
         studentMatch[student] = " "
 
     for hosptial in hospitals:
         hosptialMatch[hosptial] = " "
+    '''
+    index = 1
+    for i in range(n):
+        hospitals[index] = [[s, True] for s in data[i]]
+        index += 1
+
+    index = 1
+    for i in range(n, 2 * n):
+        person[index] = [[h, True] for h in data[i]]
+        index += 1
+
+    free = {}
+
+    for i in range(n):
+        free[i + 1] = True
 
 initialize()
 
