@@ -71,6 +71,9 @@ ranking = defaultdict(dict)
 for student, hospital_list in students.items():
     ranking[student] = {v: i +1 for i,v in enumerate(hospital_list)}
 
+
+unmatched_hospital = deque(hospitals.keys())
+
 def assign(h, a):
     studentMatch[a] = h
     hosptialMatch[h] = a
@@ -78,7 +81,8 @@ def assign(h, a):
 def swap(h,a):
     pass
 
-unmatched_hospital = deque(hospitals.keys())
+def reject(h):
+    unmatched_hospital.append(h)
 
 while unmatched_hospital:
 
@@ -91,8 +95,7 @@ while unmatched_hospital:
     elif a prefers h to her/his current assignment h':
         swap(hospital, applicant)
     else:
-        #a rejects h 
-        continue
+        reject(hospital)
 
 
 
