@@ -1,5 +1,8 @@
 import sys
 
+
+#python3 verify.py /Users/jhonathanherrera/algo/Algo/Assignment1/output/test_output.out 
+
 def checkValidity(file):
     with open(file, "r") as f:
         hospitals_pick = f.readlines()
