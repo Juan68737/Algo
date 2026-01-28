@@ -133,7 +133,7 @@ while unmatched_hospital:
     # applicant = 1st applicant on h's list to whom hospital has not been matched
     applicant = hospital_list.pop(0)
 
-    if studentMatch[applicant] == " ":
+    if studentMatch[applicant] == 0:
         assign(hospital, applicant)
     elif a prefers h to her/his current assignment h':
         swap(hospital, applicant)
