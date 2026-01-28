@@ -41,7 +41,7 @@ free = {
 
 applicants = deque(["Xavier", "Yancey", "Zeus"])
 unmatched_hospital = deque(["Shands", "North", "Vetrans"])
-'''
+
 studentMatch = defaultdict(str)
 hosptialMatch = defaultdict(str)
 
@@ -55,6 +55,10 @@ hospitals = {
      "North" : ["Xavier", "Yancey", "Zeus"],
     "Vetrans" : ["Xavier", "Yancey", "Zeus"]
 }
+'''
+
+studentMatch = defaultdict(int)
+hosptialMatch = defaultdict(int)
 
 n = 3
 
@@ -73,13 +77,13 @@ hospitals = defaultdict(list)
 
 def initialize():
     
-    '''
-    for student in students:
+    
+    for student in person.keys():
         studentMatch[student] = " "
 
-    for hosptial in hospitals:
+    for hosptial in hospitals.keys():
         hosptialMatch[hosptial] = " "
-    '''
+    
     index = 1
     for i in range(n):
         hospitals[index] = [[s, True] for s in data[i]]
@@ -106,19 +110,31 @@ for student_index_id, hospital_list in person.items():
 
 unmatched_hospital = deque(hospitals.keys())
 
-for k,v in ranking.items():
-    print(f"{k} prefers this list order: {v.keys()}\n")
-'''
+def test():
+    for k,v in ranking.items():
+        print(f"{k} prefers this list order: {v.keys()}\n")
+
+    for k,v in person.items():
+        print(f"{k} prefers this list order: {v}\n")
+
+    for k,v in hospitals.items():
+        print(f"{k} prefers this list order: {v}\n")
+    
+    print("Hospitals in Queue\n")
+    print(unmatched_hospital)
+
+#test()
+
 def assign(h, a):
     studentMatch[a] = h
     hosptialMatch[h] = a
 
 def swap(h,a):
-    
     pass
 
 def reject(h):
     unmatched_hospital.append(h)
+
 
 while unmatched_hospital:
 
@@ -133,5 +149,3 @@ while unmatched_hospital:
     else:
         reject(hospital)
 
-
-'''
