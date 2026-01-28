@@ -30,7 +30,7 @@ data = [
     [1, 2, 3]   # student 3 prefs
 ]
 
-'''
+
 person = defaultdict(list)
 hospitals = defaultdict(list)
 
@@ -68,7 +68,7 @@ free = {
 applicants = deque(["Xavier", "Yancey", "Zeus"])
 unmatched_hospital = deque(["Shands", "North", "Vetrans"])
 
-'''
+
 studentMatch = defaultdict(str)
 hosptialMatch = defaultdict(str)
 
