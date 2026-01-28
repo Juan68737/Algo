@@ -16,6 +16,7 @@ while (some hospital is free and hasn’t been matched/assigned
     else
         a rejects h
 }
+
 '''
 
 # Example input
@@ -29,6 +30,7 @@ data = [
     [1, 2, 3]   # student 3 prefs
 ]
 
+'''
 person = defaultdict(list)
 hospitals = defaultdict(list)
 
@@ -66,16 +68,50 @@ free = {
 applicants = deque(["Xavier", "Yancey", "Zeus"])
 unmatched_hospital = deque(["Shands", "North", "Vetrans"])
 
+'''
+studentMatch = defaultdict(str)
+hosptialMatch = defaultdict(str)
+
+students = {
+        "Xavier": ["Shands", "North", "Vetrans"],
+        "Yancey": ["North", "Shands", "Vetrans"],
+        "Zeus": ["Shands", "North", "Vetrans"]
+    }
+hospitals = {
+    "Shands": ["Yancey", "Xavier", "Zeus"],
+     "North": ["Xavier", "Yancey", "Zeus"],
+    "Vetrans": ["Xavier", "Yancey", "Zeus"]
+}
+
+
+def initialize():
+
+    for student in students:
+        studentMatch[student] = " "
+
+    for hosptial in hospitals:
+        hosptialMatch[hosptial] = " "
+
+
+initialize()
+
+# If the students have the ranking
+ranking = defaultdict(dict)
+
+for student, hospital_list in students.items():
+    ranking[student] = {v: i + 1 for i, v in enumerate(hospital_list)}
+
 
 def assign(h, a):
-    pass
+    studentMatch[a] = h
+    hosptialMatch[h] = a
 
 
 def swap(h, a):
     pass
 
 
-perfer = dict()
+unmatched_hospital = deque(hospitals.keys())
 
 while unmatched_hospital:
 
@@ -85,9 +121,12 @@ while unmatched_hospital:
     # while True:
     #    a = applicants.pop()
 
-    if free[applicant]:
+    applicant = 1st applicant on h's list to whom hospital has not been matched
+
+    if studentMatch[applicant] == " ":
         assign(hospital, applicant)
-    elif not free[applicant] and perfer[applicant] == hospital:
+    elif a prefers h to her/his current assignment h':
         swap(hospital, applicant)
     else:
+        #a rejects h 
         continue
