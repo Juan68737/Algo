@@ -100,12 +100,15 @@ initialize()
 #If the students have the ranking
 ranking = defaultdict(dict)
 
-for student, hospital_list in students.items():
-    ranking[student] = {v: i +1 for i,v in enumerate(hospital_list)}
-
+for student_index_id, hospital_list in person.items():
+    #hospital, unassigned = hospital_list
+    ranking[student_index_id] = {v[0]: i +1 for i,v in enumerate(hospital_list)}
 
 unmatched_hospital = deque(hospitals.keys())
 
+for k,v in ranking.items():
+    print(f"{k} prefers this list order: {v.keys()}\n")
+'''
 def assign(h, a):
     studentMatch[a] = h
     hosptialMatch[h] = a
@@ -131,4 +134,4 @@ while unmatched_hospital:
         reject(hospital)
 
 
-
+'''
