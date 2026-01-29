@@ -104,10 +104,15 @@ initialize()
 def assign(h, a):
     studentMatch[a] = h
     hosptialMatch[h] = a
+    free[a] = False
 
 
 def swap(h, a):
-    pass
+    oldHospital = studentMatch[a]
+    studentMatch[a] = h
+    hospitalMatch[h] = a
+    hospitalMatch[oldHospital] = None
+    unmatched_hospital.append(oldHospital)
 
 
 unmatched_hospital = deque(hospitals.keys())
@@ -115,8 +120,8 @@ unmatched_hospital = deque(hospitals.keys())
 # If the students have the ranking
 ranking = defaultdict(dict)
 
-for student, prefs in person.items():
-    for rank, (hospital, _) in enumerate(prefs):
+for student, prefernces in person.items():
+    for rank, (hospital, _) in enumerate(prefernces):
         ranking[student][hospital] = rank
 
 while unmatched_hospital:
