@@ -128,19 +128,19 @@ for student, prefernces in person.items():
 while unmatchedHospital:
 
     hospital = unmatchedHospital.popleft()
-    hospital_list = hospitals[hospital]  # -> we get the list
+    hospitalList = hospitals[hospital]  # -> we get the list
 
     # applicant = 1st applicant on h's list to whom hospital has not been matched
-    # applicant = hospital_list.pop(0)
+    # applicant = hospitalList.pop(0)
     applicant = None
-    for student in hospital_list:
+    for student in hospitalList:
         if student[1] == True:
             applicant = student
             student[1] = False
             break
 
     # if there is no applicant
-    # this means they all have been matched, so we continue with the next hospital
+    # this means they all have been matched, so we continue
     if applicant is None:
         continue
 
