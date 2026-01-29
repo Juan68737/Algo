@@ -70,7 +70,7 @@ free = {
 }
 
 applicants = deque(["Xavier", "Yancey", "Zeus"])
-unmatched_hospital = deque(["Shands", "North", "Vetrans"])
+unmatchedHospital = deque(["Shands", "North", "Vetrans"])
 
 
 studentMatch = defaultdict(str)
@@ -102,20 +102,20 @@ initialize()
 
 
 def assign(h, a):
-    studentMatch[a] = h
-    hosptialMatch[h] = a
-    free[a] = False
+    studentMatch[a[0]] = h
+    hospitalMatch[h] = a[0]
+    free[a[0]] = False
 
 
 def swap(h, a):
-    oldHospital = studentMatch[a]
-    studentMatch[a] = h
-    hospitalMatch[h] = a
+    oldHospital = studentMatch[a[0]]
+    studentMatch[a[0]] = h
+    hospitalMatch[h] = a[0]
     hospitalMatch[oldHospital] = None
-    unmatched_hospital.append(oldHospital)
+    unmatchedHospital.append(oldHospital)
 
 
-unmatched_hospital = deque(hospitals.keys())
+unmatchedHospital = deque(hospitals.keys())
 
 # If the students have the ranking
 ranking = defaultdict(dict)
@@ -124,24 +124,35 @@ for student, prefernces in person.items():
     for rank, (hospital, _) in enumerate(prefernces):
         ranking[student][hospital] = rank
 
-while unmatched_hospital:
 
-    hospital = unmatched_hospital.popleft()
+while unmatchedHospital:
+
+    hospital = unmatchedHospital.popleft()
     hospital_list = hospitals[hospital]  # -> we get the list
 
-    # planning to deque the hospital's list
-    # so if the hospital's list is empty
-    # we continue with the next hospital
-    if not hospital_list:
+    # applicant = 1st applicant on h's list to whom hospital has not been matched
+    # applicant = hospital_list.pop(0)
+    applicant = None
+    for student in hospital_list:
+        if student[1] == True:
+            applicant = student
+            student[1] = False
+            break
+
+    # if there is no applicant
+    # this means they all have been matched, so we continue with the next hospital
+    if applicant is None:
         continue
 
-    # applicant = 1st applicant on h's list to whom hospital has not been matched
-    applicant = hospital_list.pop(0)
+    # get the current hospital that the applicant is matched to
+    student = applicant[0]
+    currentHospital = studentMatch[student]
 
-    if studentMatch[applicant] == 0:
+    if free[student]:
         assign(hospital, applicant)
-    elif a prefers h to her/his current assignment h':
+    # elif a prefers h to her/his current assignment h':
+    elif ranking[student][hospital] < ranking[student][currentHospital]:
         swap(hospital, applicant)
     else:
-        #a rejects h 
-        continue
+        # a rejects h
+        unmatchedHospital.append(hospital)
