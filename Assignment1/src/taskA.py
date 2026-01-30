@@ -42,12 +42,12 @@ hospitals = defaultdict(list)
 
 index = 1
 for i in range(n):
-    hospitals[index] = [[s, True] for s in data[i]] #change here
+    hospitals[index] = [[s, True] for s in data[i]]  # change here
     index += 1
 
 index = 1
 for i in range(n, 2 * n):
-    person[index] = [[h, True] for h in data[i]] #change here
+    person[index] = [[h, True] for h in data[i]]  # change here
     index += 1
 
 free = {}
@@ -164,50 +164,92 @@ def gs(unmatchedHospital):
             # a rejects h
             unmatchedHospital.append(hospital)
 
+
 start1 = time.perf_counter()
 gs(unmatchedHospital)
 end1 = time.perf_counter()
-for k,v in hospitalMatch.items():
+for k, v in hospitalMatch.items():
     print(f"{k} {v}\n")
 
-#-------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------
 print(f"Timer for G.S if :{(end1-start1):.10f}")
-#TaskB
+# TaskB
 
-#Check Validity
+# Check Validity
 
-def checkValidity(hospitalMatch):
-    
-    students = set()
+
+def checkValidity(hospitalMatch, studentMatch, n):
+
+    matchedStudents = set()
+
+    for h in range(1, n + 1):
+        if hospitalMatch[h] is None:
+            return False
+
+        student = hospitalMatch[h]
+
+        if student in matchedStudents:
+            return False
+
+        matchedStudents.add(student)
+
+    for s in range(1, n + 1):
+        if studentMatch[s] is None:
+            return False
+
+    if len(matchedStudents) != n:
+        return False
+
+    return True
 
     '''
     Checks validity: each hospital and each student is matched to
     exactly one partner, with no duplicates
     
     '''
+
+    '''
     for _,a in hospitalMatch.items():
         if a in students:
             return False
         students.add(a)
     return True
+    '''
 
-#def checkStability(hosptials, students):
+
+def checkStability(hosptialMatch, studentMatch, hospitals, ranking):
+    for h in hospitals:
+        currentStudent = hospitalMatch[h]
+
+        for s, _ in hospitals[h]:
+
+            if s == currentStudent:
+                break
+
+            currentHospital = studentMatch[s]
+
+            if ranking[s][h] < ranking[s][currentHospital]:
+                return False
+
+    return True
 
 
-if checkValidity(hospitalMatch):
-    print("No erros, Valid G.S. Output")
+if checkValidity(hospitalMatch, studentMatch, n):
+    print("No errors, Valid G.S. Output")
 else:
-    print("NOT VALID! You either have duplicate matches or a blocker \n please check again!")
+    print("NOT VALID! You have duplicate matches \n please check again!")
 
-#print(person)
-#print("-")
-#print(hospitals)
-#print("-")
+if checkStability(hospitalMatch, studentMatch, hospitals, ranking):
+    print("No errors, Valid G.S. Output")
+else:
+    print("NOT STABLE! You have a blocker \n please check again!")
 
-#print(studentMatch)
-#print("-")
+# print(person)
+# print("-")
+# print(hospitals)
+# print("-")
 
-#print(hospitalMatch)
+# print(studentMatch)
+# print("-")
 
-
-
+# print(hospitalMatch)
