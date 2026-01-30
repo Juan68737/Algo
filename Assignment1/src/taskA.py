@@ -1,7 +1,7 @@
 from collections import defaultdict, deque
 import sys
 import time
-
+import random
 '''
 Initialize each person and hospital to be free.
 
@@ -208,3 +208,6 @@ else:
 #print("-")
 
 #print(hospitalMatch)
+
+
+
