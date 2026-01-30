@@ -124,7 +124,7 @@ def fullgs(nAmount):
         #print(f"{k} {v}\n")
 
     #-------------------------------------------------------------------------------------
-    #print(f"Timer for G.S is :{(end1-start1):.10f}")
+    print(f"Timer for G.S is :{(end1-start1):.10f}")
     #TaskB
 
     #Check Validity
