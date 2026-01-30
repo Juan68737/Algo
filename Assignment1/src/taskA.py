@@ -1,5 +1,6 @@
 from collections import defaultdict, deque
 import sys
+import time
 
 '''
 Initialize each person and hospital to be free.
@@ -130,44 +131,47 @@ for student, prefernces in person.items():
         ranking[student][hospital] = rank
 
 
-while unmatchedHospital:
+def gs(unmatchedHospital):
+    while unmatchedHospital:
 
-    hospital = unmatchedHospital.popleft()
-    hospitalList = hospitals[hospital]  # -> we get the list
+        hospital = unmatchedHospital.popleft()
+        hospitalList = hospitals[hospital]  # -> we get the list
 
-    # applicant = 1st applicant on h's list to whom hospital has not been matched
-    # applicant = hospitalList.pop(0)
-    applicant = None
-    for student in hospitalList:
-        if student[1] == True:
-            applicant = student
-            student[1] = False
-            break
+        # applicant = 1st applicant on h's list to whom hospital has not been matched
+        # applicant = hospitalList.pop(0)
+        applicant = None
+        for student in hospitalList:
+            if student[1] == True:
+                applicant = student
+                student[1] = False
+                break
 
-    # if there is no applicant
-    # this means they all have been matched, so we continue
-    if applicant is None:
-        continue
+        # if there is no applicant
+        # this means they all have been matched, so we continue
+        if applicant is None:
+            continue
 
-    # get the current hospital that the applicant is matched to
-    student = applicant[0]
-    currentHospital = studentMatch[student]
+        # get the current hospital that the applicant is matched to
+        student = applicant[0]
+        currentHospital = studentMatch[student]
 
-    if free[student]:
-        assign(hospital, applicant)
-    # elif a prefers h to her/his current assignment h':
-    elif ranking[student][hospital] < ranking[student][currentHospital]:
-        swap(hospital, applicant)
-    else:
-        # a rejects h
-        unmatchedHospital.append(hospital)
+        if free[student]:
+            assign(hospital, applicant)
+        # elif a prefers h to her/his current assignment h':
+        elif ranking[student][hospital] < ranking[student][currentHospital]:
+            swap(hospital, applicant)
+        else:
+            # a rejects h
+            unmatchedHospital.append(hospital)
 
-
+start1 = time.perf_counter()
+gs(unmatchedHospital)
+end1 = time.perf_counter()
 for k,v in hospitalMatch.items():
     print(f"{k} {v}\n")
 
 #-------------------------------------------------------------------------------------
-
+print(f"Timer for G.S if :{(end1-start1):.10f}")
 #TaskB
 
 #Check Validity
@@ -187,7 +191,20 @@ def checkValidity(hospitalMatch):
         students.add(a)
     return True
 
+#def checkStability(hosptials, students):
+
+
 if checkValidity(hospitalMatch):
     print("No erros, Valid G.S. Output")
 else:
     print("NOT VALID! You either have duplicate matches or a blocker \n please check again!")
+
+#print(person)
+#print("-")
+#print(hospitals)
+#print("-")
+
+#print(studentMatch)
+#print("-")
+
+#print(hospitalMatch)
