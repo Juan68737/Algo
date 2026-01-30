@@ -1,4 +1,5 @@
 from collections import defaultdict, deque
+import sys
 
 '''
 Initialize each person and hospital to be free.
@@ -19,14 +20,18 @@ while (some hospital is free and hasn’t been matched/assigned
 
 '''
 
+with open(sys.argv[1], "r") as f:
+    n = int(f.readline().strip())
+    data = [[int(x) for x in line.strip().split()] for line in f]
+
 # Example input
-n = 3
-data = [
+
+data2 = [
     [1, 2, 3],  # hospital 1 prefs
-    [2, 3, 1],  # hospital 2 prefs
-    [2, 1, 3],  # hospital 3 prefs
+    [1, 2, 3],  # hospital 2 prefs
+    [2, 3, 1],  # hospital 3 prefs
     [2, 1, 3],  # student 1 prefs
-    [1, 2, 3],  # student 2 prefs
+    [3, 1, 2],  # student 2 prefs
     [1, 2, 3]   # student 3 prefs
 ]
 
@@ -36,12 +41,12 @@ hospitals = defaultdict(list)
 
 index = 1
 for i in range(n):
-    hospitals[index] = [[s, True] for s in data[i]]
+    hospitals[index] = [[s, True] for s in data[i]] #change here
     index += 1
 
 index = 1
 for i in range(n, 2 * n):
-    person[index] = [[h, True] for h in data[i]]
+    person[index] = [[h, True] for h in data[i]] #change here
     index += 1
 
 free = {}
@@ -156,3 +161,33 @@ while unmatchedHospital:
     else:
         # a rejects h
         unmatchedHospital.append(hospital)
+
+
+for k,v in hospitalMatch.items():
+    print(f"{k} {v}\n")
+
+#-------------------------------------------------------------------------------------
+
+#TaskB
+
+#Check Validity
+
+def checkValidity(hospitalMatch):
+    
+    students = set()
+
+    '''
+    Checks validity: each hospital and each student is matched to
+    exactly one partner, with no duplicates
+    
+    '''
+    for _,a in hospitalMatch.items():
+        if a in students:
+            return False
+        students.add(a)
+    return True
+
+if checkValidity(hospitalMatch):
+    print("No erros, Valid G.S. Output")
+else:
+    print("NOT VALID! You either have duplicate matches or a blocker \n please check again!")
