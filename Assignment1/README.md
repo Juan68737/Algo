@@ -3,9 +3,11 @@ Jhonathan Herrera (82264230) & Jason Guan (28702814)
 Task A & Task B
 
 to test example.in -> RUN
+(first cd src)
 python3 taskA.py ../input/example.in
 
 to test example2.in -> RUN
+(first cd src)
 python3 taskA.py ../input/example2.in
 
 Expected Output:
