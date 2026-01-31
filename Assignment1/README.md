@@ -63,48 +63,48 @@ N Time
 
 For Validation
 N Time
-1 0.000001
-2 0.000001
-4 0.00000075
-8 0.000000958
-16 0.000001458
-32 0.000002459
-64 0.000003792
-128 0.000010625
-256 0.000013667
-512 0.000037833
+1 0.000002292
+2 0.000002209
+4 0.000002333
+8 0.0000035
+16 0.000006458
+32 0.000012
+64 0.000026792
+128 0.00008325
+256 0.000198708
+512 0.000786833
 
 The output was:
 For N = 1
-Timer for G.S is :0.0000020000
-valid time was: 0.0000010830
+Timer for G.S is :0.0000020420
+valid time was: 0.0000022920
 For N = 2
-Timer for G.S is :0.0000032920
-valid time was: 0.0000010000
+Timer for G.S is :0.0000022080
+valid time was: 0.0000022090
 For N = 4
-Timer for G.S is :0.0000025840
-valid time was: 0.0000005830
+Timer for G.S is :0.0000036660
+valid time was: 0.0000023330
 For N = 8
-Timer for G.S is :0.0000078750
-valid time was: 0.0000009170
+Timer for G.S is :0.0000075000
+valid time was: 0.0000035000
 For N = 16
-Timer for G.S is :0.0000177910
-valid time was: 0.0000014590
+Timer for G.S is :0.0000159580
+valid time was: 0.0000064580
 For N = 32
-Timer for G.S is :0.0000588330
-valid time was: 0.0000024580
+Timer for G.S is :0.0000374160
+valid time was: 0.0000120000
 For N = 64
-Timer for G.S is :0.0000905830
-valid time was: 0.0000040000
+Timer for G.S is :0.0000769170
+valid time was: 0.0000267920
 For N = 128
-Timer for G.S is :0.0007181670
-valid time was: 0.0000095000
+Timer for G.S is :0.0002055830
+valid time was: 0.0000832500
 For N = 256
-Timer for G.S is :0.0008255830
-valid time was: 0.0000186660
+Timer for G.S is :0.0008280410
+valid time was: 0.0001987080
 For N = 512
-Timer for G.S is :0.0024054580
-valid time was: 0.0000517920
+Timer for G.S is :0.0035641670
+valid time was: 0.0007868330
 
 What is the trend that you notice?
 

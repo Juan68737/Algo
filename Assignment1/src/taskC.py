@@ -129,34 +129,50 @@ def fullgs(nAmount):
 
     #Check Validity
 
-    def checkValidity(hospitalMatch):
-        
-        students = set()
+    def checkValidity(hospitalMatch, studentMatch, n):
 
-        '''
-        Checks validity: each hospital and each student is matched to
-        exactly one partner, with no duplicates
-        
-        '''
-        for _,a in hospitalMatch.items():
-            if a in students:
+        matchedStudents = set()
+
+        for h in range(1, n + 1):
+            if hospitalMatch[h] is None:
                 return False
-            students.add(a)
-        return True
 
+            student = hospitalMatch[h]
+
+            if student in matchedStudents:
+                return False
+
+            matchedStudents.add(student)
+
+        for s in range(1, n + 1):
+            if studentMatch[s] is None:
+                return False
+
+        if len(matchedStudents) != n:
+            return False
+
+        return True
     #def checkStability(hosptials, students):
 
-    def valid(hospitalMatch):
-        students = set()
+    def checkStability(hosptialMatch, studentMatch, hospitals, ranking):
+        for h in hospitals:
+            currentStudent = hospitalMatch[h]
 
-        for _,a in hospitalMatch.items():
-            if a in students:
-                return False
-            students.add(a)
+            for s, _ in hospitals[h]:
+
+                if s == currentStudent:
+                    break
+
+                currentHospital = studentMatch[s]
+
+                if ranking[s][h] < ranking[s][currentHospital]:
+                    return False
+
         return True
 
     start2 = time.perf_counter()
-    valid(hospitalMatch)
+    checkValidity(hospitalMatch, studentMatch, n)
+    checkStability(hospitalMatch, studentMatch, hospitals, ranking)
     end2 = time.perf_counter()
 
     r = f"valid time was: {end2-start2:.10f}"
