@@ -1,4 +1,4 @@
-Jhonathan Herrera (82264230) &
+Jhonathan Herrera (82264230) & Jason Guan (28702814)
 
 Task A & Task B
 
