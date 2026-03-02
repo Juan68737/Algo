@@ -1,9 +1,5 @@
 
 from collections import deque
-k = 2
-m = 5
-ids = [1, 2, 1, 2, 3, 4]
-
 
 class FIFO:
     def __init__(self, k,m,ids):
