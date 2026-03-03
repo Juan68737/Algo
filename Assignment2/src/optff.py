@@ -61,9 +61,9 @@ class OPTFF:
             #self.orderedList.move_to_end(id)
         print(F"OPTFF : {self.miss}")
 
-def printInfo(self):
-    print(f"This is the cache: {self.cache}")
-    print(f"This is the miss amount: {self.miss}")
+    def printInfo(self):
+        print(f"This is the cache: {self.cache}")
+        print(f"This is the miss amount: {self.miss}")
 
 
 
