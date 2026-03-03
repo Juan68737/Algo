@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 class LRU:
-    def __init__(self, k,m,ids):
+    def __init__(self, k, m, ids):
         self.k = k
         self.m = m
         self.ids = ids
