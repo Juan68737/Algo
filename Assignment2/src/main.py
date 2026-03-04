@@ -12,6 +12,9 @@ with open(sys.argv[1], "r") as f:
 
     r = [int(x) for x in f.readline().strip().split()] 
 
+if len(r) != m:
+    print("Invalid input. The number of sequence of integer IDs must match m, the number of requests.")
+    sys.exit(1)
 
 if k >= 1:
     fifo = FIFO(k,m,r)
@@ -22,3 +25,4 @@ if k >= 1:
     optff.optff()
 else:
     print("Invalid cache capacity. Cache capacity must be at least 1.")
+    sys.exit(1)
