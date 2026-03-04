@@ -13,9 +13,9 @@ with open(sys.argv[1], "r") as f:
     r = [int(x) for x in f.readline().strip().split()] 
 
 
-lru = LRU(k,m,r)
-lru.lru()
-fifo = FIFO(k,m,r)
-fifo.fifo()
-optff = OPTFF(k,m,r)
-optff.optff()
+    fifo = FIFO(k,m,r)
+    fifo.fifo()
+    lru = LRU(k,m,r)
+    lru.lru()
+    optff = OPTFF(k,m,r)
+    optff.optff()
