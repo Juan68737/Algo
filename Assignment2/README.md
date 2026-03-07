@@ -15,6 +15,8 @@ FIFO : 5
 LRU : 4
 OPTFF : 4
 
+We have a input folder that you can use to run and check the result within the output file which shows the solution it should be 
+
 **solutions to the written component**
 
 1.
