@@ -60,8 +60,8 @@ A evicts or removes some other page y.
 Create a new algorithm A′ identical to A.
 
 However, for this algorithm, the only time it is different is at time t where it evicts or removes x (same as OPTFF), and after that it behaves like A with the names of x, y swapped until one of them is requested.
-Since the next usage of x greater than or equal to the next usage of y, page y is needed no later than x.
+Since the next usage of x is greater than or equal to the next usage of y, page y is needed no later than x.
 Therefore, replacing y by x at time t cannot create an earlier extra miss. Before x is needed, A' is never worse than the A algorithm.
 When one of {x, y} is requested, the swap with the interval ends, and from then on A' can be like A without increasing misses.
 So A' has no more misses than A, and now agrees with OPTFF.
-Therefore, misses(OPTFF) less than or equal to misses(A), and OPTFF is optimal.
+Therefore, misses(OPTFF) is less than or equal to misses(A), and OPTFF is optimal.
