@@ -49,6 +49,7 @@ class OPTFF:
                         nextUse = float("inf")
                     check.append((id_in_cache, nextUse))
 
+
                 #check = [(id_in_cache, futureMap[id_in_cache]) for id_in_cache in cache]
                 check.sort(key=lambda x: x[1])
                 remove_id, _ = check[-1]
