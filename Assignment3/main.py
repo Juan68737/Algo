@@ -1,10 +1,4 @@
-
-
-
-
-
 '''
-# we will be using length based
 OPT(i,j) = {
     0 if i == 0
     0 if j == 0
@@ -41,6 +35,7 @@ def topDown(A: str, B: str, K: int, v: dict[str,int]):
 
     print(f"The common subsequence for {A} and {B} is: {res}")
 
+
 def bottomUp(A: str, B: str, K: int, v: dict[str,int]):
     R = len(A)
     C = len(B)
@@ -56,16 +51,12 @@ def bottomUp(A: str, B: str, K: int, v: dict[str,int]):
     res = M[R][C]
 
     bt = backTrack(A, B, M,v)
-    print(f"The common subsequence for {A} and {B} is: {res}")
-    print(f"The backtrack results: {bt}")
-    print(M)
+    print(f"The common subsequence for {A} and {B} is: {res} with the backtrack results of {bt}")
 
 
 def backTrack(A:str, B:str, M, v):
     i = len(A)
     j = len(B)
-
-
     res = []
 
     while i > 0 and j > 0:
