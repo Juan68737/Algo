@@ -9,7 +9,7 @@ OPT(i,j) = {
 }
 '''
 
-#todo: we need to define v array based on the input
+#TODO: Make CS class and add all 3 functions into it, call it (not topDown) into main.py
 def topDown(A: str, B: str, K: int, v: dict[str,int]):
     
     R = len(A)
