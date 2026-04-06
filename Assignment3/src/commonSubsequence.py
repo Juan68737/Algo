@@ -70,7 +70,7 @@ class CS:
                 res.append(self.A[i - 1])
                 i -= 1
                 j -= 1
-            elif M[i][j] == M[i][j - 1]:
+            elif M[i][j] == M[i - 1][j]:
                 i -= 1
             else:
                 j -= 1
