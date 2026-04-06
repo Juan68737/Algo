@@ -9,77 +9,73 @@ OPT(i,j) = {
 }
 '''
 
-#TODO: Make CS class and add all 3 functions into it, call it (not topDown) into main.py
-def topDown(A: str, B: str, K: int, v: dict[str,int]):
-    
-    R = len(A)
-    C = len(B)
-    memo = {}
-    res = 0
-    def OPT(i,j):
-        if i == 0 or j == 0:
-            return 0
+class CS:
+    def __init__(self, A: str, B: str, K: int, v: dict[str, int]):
+        self.A = A
+        self.B = B
+        self.K = K
+        self.v = v
+        self.R = len(A)
+        self.C = len(B)
 
-        if (i,j) in memo:
-            return memo[(i,j)]
+    def topDown(self) -> int:
+        memo: dict[tuple[int, int], int] = {}
 
-        if A[i-1] != B[j-1]:
-            memo[(i,j)] = max(OPT(i-1,j),
-                              OPT(i,j-1))
-        else:
-            memo[(i,j)] = max(OPT(i-1,j),
-                              OPT(i,j-1),
-                              v[A[i-1]] + OPT(i-1,j-1))
-        return memo[(i,j)]
-    res = OPT(R,C)
+        def OPT(i: int, j: int) -> int:
+            if i == 0 or j == 0:
+                return 0
 
-    print(f"The common subsequence for {A} and {B} is: {res}")
+            if (i, j) in memo:
+                return memo[(i, j)]
 
-
-def bottomUp(A: str, B: str, K: int, v: dict[str,int]):
-    R = len(A)
-    C = len(B)
-    res = 0
-    M = [[0] * (C+1) for _ in range(R+1)]
-    for i in range(1,R+1):
-        for j in range(1,C+1):
-
-            if A[i-1] != B[j-1]:
-                M[i][j] = max(M[i-1][j], M[i][j-1])
+            if self.A[i - 1] != self.B[j - 1]:
+                memo[(i, j)] = max(OPT(i - 1, j), OPT(i, j - 1))
             else:
-                M[i][j] = max(M[i-1][j], M[i][j-1], v[A[i-1]] + M[i-1][j-1])
-    res = M[R][C]
+                memo[(i, j)] = max(
+                    OPT(i - 1, j),
+                    OPT(i, j - 1),
+                    self.v[self.A[i - 1]] + OPT(i - 1, j - 1),
+                )
+            return memo[(i, j)]
 
-    bt = backTrack(A, B, M,v)
-    print(f"The common subsequence for {A} and {B} is: {res} with the backtrack results of {bt}")
+        return OPT(self.R, self.C)
 
+    def bottomUp(self) -> tuple[int, str]:
+        M = [[0] * (self.C + 1) for _ in range(self.R + 1)]
+        for i in range(1, self.R + 1):
+            for j in range(1, self.C + 1):
+                if self.A[i - 1] != self.B[j - 1]:
+                    M[i][j] = max(M[i - 1][j], M[i][j - 1])
+                else:
+                    M[i][j] = max(
+                        M[i - 1][j],
+                        M[i][j - 1],
+                        self.v[self.A[i - 1]] + M[i - 1][j - 1],
+                    )
 
-def backTrack(A:str, B:str, M, v):
-    i = len(A)
-    j = len(B)
-    res = []
+        max_value = M[self.R][self.C]
+        subsequence = self.backTrack(M)
+        return max_value, subsequence
 
-    while i > 0 and j > 0:
-        if A[i-1] == B[j-1] and M[i][j] == v[A[i-1]] + M[i-1][j-1]:
+    def backTrack(self, M: list[list[int]]) -> str:
+        i = self.R
+        j = self.C
+        res: list[str] = []
 
-            #or B[j-1], doesnt really matter
-            res.append(A[i-1])
-            i -= 1
-            j -= 1
-        #the order of elif and else doesnt matter
-        elif M[i][j] == M[i][j-1]:
-            i -= 1
-        else:
-            j -= 1
-    return res[::-1]
+        while i > 0 and j > 0:
+            if (
+                self.A[i - 1] == self.B[j - 1]
+                and M[i][j] == self.v[self.A[i - 1]] + M[i - 1][j - 1]
+            ):
+                res.append(self.A[i - 1])
+                i -= 1
+                j -= 1
+            elif M[i][j] == M[i][j - 1]:
+                i -= 1
+            else:
+                j -= 1
 
-d = {
-    'a': 3,
-    'b': 4,
-    'c': 10,
-    'd': 1
-}
-bottomUp("aab", "ab",2, d)
+        return "".join(reversed(res))
 
 
 
